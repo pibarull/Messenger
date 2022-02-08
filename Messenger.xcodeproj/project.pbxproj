@@ -92,8 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				3B08BE4827B2D33F00C36C2F /* ConversationViewController.swift */,
-				3B08BE5E27B2F74900C36C2F /* LoginViewController.swift */,
-				3B08BE6027B2F75900C36C2F /* RegisterViewController.swift */,
+				3B08BE7327B3148E00C36C2F /* Login */,
 				3B08BE6227B2F78500C36C2F /* PhotoViewerViewController.swift */,
 				3B08BE6427B2F79100C36C2F /* VideoPlayerViewController.swift */,
 				3B08BE6627B2F7C200C36C2F /* NewConversationViewController.swift */,
@@ -131,6 +130,15 @@
 				3B08BE4F27B2D34000C36C2F /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3B08BE7327B3148E00C36C2F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3B08BE5E27B2F74900C36C2F /* LoginViewController.swift */,
+				3B08BE6027B2F75900C36C2F /* RegisterViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
