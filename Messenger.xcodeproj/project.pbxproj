@@ -19,6 +19,7 @@
 		3B08BE6527B2F79100C36C2F /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B08BE6427B2F79100C36C2F /* VideoPlayerViewController.swift */; };
 		3B08BE6727B2F7C200C36C2F /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B08BE6627B2F7C200C36C2F /* NewConversationViewController.swift */; };
 		3B08BE6927B2F7D400C36C2F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B08BE6827B2F7D400C36C2F /* ProfileViewController.swift */; };
+		3BEFAAB227B44F6E00D1E3B0 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEFAAB127B44F6E00D1E3B0 /* UIView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		3B08BE6427B2F79100C36C2F /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		3B08BE6627B2F7C200C36C2F /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		3B08BE6827B2F7D400C36C2F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		3BEFAAB127B44F6E00D1E3B0 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		3B08BE4327B2D33F00C36C2F /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
+				3BEFAAB027B44F5E00D1E3B0 /* Extensions */,
 				3B08BE5C27B2F44400C36C2F /* ViewModels */,
 				3B08BE5B27B2F43C00C36C2F /* Models */,
 				3B08BE5A27B2F43600C36C2F /* Views */,
@@ -139,6 +142,14 @@
 				3B08BE6027B2F75900C36C2F /* RegisterViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		3BEFAAB027B44F5E00D1E3B0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3BEFAAB127B44F6E00D1E3B0 /* UIView+.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,6 +227,7 @@
 				3B08BE6127B2F75900C36C2F /* RegisterViewController.swift in Sources */,
 				3B08BE6727B2F7C200C36C2F /* NewConversationViewController.swift in Sources */,
 				3B08BE4927B2D33F00C36C2F /* ConversationViewController.swift in Sources */,
+				3BEFAAB227B44F6E00D1E3B0 /* UIView+.swift in Sources */,
 				3B08BE6527B2F79100C36C2F /* VideoPlayerViewController.swift in Sources */,
 				3B08BE4527B2D33F00C36C2F /* AppDelegate.swift in Sources */,
 				3B08BE6927B2F7D400C36C2F /* ProfileViewController.swift in Sources */,
