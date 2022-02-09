@@ -1,0 +1,19 @@
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+### Swift ###
+# Xcode
+*.xcodeproj/
+
+*.xcuserdatad/
+bnpl.xcodeproj/project.pbxproj
+
+## Build generated
+build/
+DerivedData/
