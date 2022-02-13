@@ -5,6 +5,8 @@
 //  Created by Ilia Ershov on 08.02.2022.
 //
 
+//import PhotosUI
+//import SwiftUI
 import UIKit
 
 private enum Constants {
@@ -13,6 +15,7 @@ private enum Constants {
     static let viewsHeight: CGFloat = 52
     static let cornerRadius: CGFloat = 12
 
+    static let profileImageBorderWidth: CGFloat = 2
     static let firstNameTextFieldPlaceholder = "First Name"
     static let secondNameTextFieldPlaceholder = "Second Name"
 
@@ -54,7 +57,9 @@ class RegisterViewController: UIViewController {
         setUpPasswordTextField()
         setUpPasswordErrorLabel()
         setUpRegisterButton()
+    }
 
+    override func viewDidLayoutSubviews() {
         setUpLayout()
     }
 
@@ -94,12 +99,16 @@ class RegisterViewController: UIViewController {
         profileImageView.image = UIImage(systemName: "person")
         profileImageView.tintColor = .lightGray
         profileImageView.isUserInteractionEnabled = true
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.borderWidth = Constants.profileImageBorderWidth
+        profileImageView.layer.borderColor = UIColor.lightGray.cgColor
+
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapProfileImageView))
         profileImageView.addGestureRecognizer(gesture)
     }
 
     @objc private func didTapProfileImageView() {
-        print("Change profile")
+        presentPhotoActionSheet()
     }
 
     private func setUpFirstNameTextField() {
@@ -231,7 +240,8 @@ class RegisterViewController: UIViewController {
         profileImageView.frame = CGRect(x: (scrollView.width - profileImageViewWidth)/2,
                                           y: scrollView.top + 40,
                                           width: profileImageViewWidth,
-                                          height: profileImageViewWidth)
+                                           height: profileImageViewWidth)
+        profileImageView.layer.cornerRadius = profileImageView.width/2
 
         firstNameTextField.frame = CGRect(x: (scrollView.width - textFieldWidth)/2,
                                            y: profileImageView.bottom + 30,
@@ -345,5 +355,59 @@ extension RegisterViewController: UITextFieldDelegate {
         }
 
         return true
+    }
+}
+
+extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    private func presentPhotoActionSheet() {
+        let actionSheet = UIAlertController(title: "Profile Picture",
+                                            message: "How would you like to select a picture?",
+                                            preferredStyle: .actionSheet)
+        actionSheet.addAction(.init(title: "Cancel",
+                                    style: .cancel,
+                                    handler: nil))
+        actionSheet.addAction(.init(title: "Take photo",
+                                    style: .default,
+                                    handler: { [weak self] _ in
+            self?.presentCamera()
+        }))
+        actionSheet.addAction(.init(title: "Select photo from library",
+                                    style: .default,
+                                    handler: { [weak self] _ in
+            self?.presentPhotoPicker()
+        }))
+        present(actionSheet, animated: true)
+    }
+
+    private func presentCamera() {
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        vc.allowsEditing = true
+        vc.sourceType = .camera
+        present(vc, animated: true)
+    }
+
+    private func presentPhotoPicker() {
+//        if #available(iOS 14, *) {
+//            let vc = PHPickerViewController()
+//        } else {
+            let vc = UIImagePickerController()
+            vc.delegate = self
+            vc.allowsEditing = true
+            vc.sourceType = .photoLibrary
+            present(vc, animated: true)
+//        }
+        
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let selectedPicture = info[.editedImage] as? UIImage else { return }
+        self.profileImageView.image = selectedPicture
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }
