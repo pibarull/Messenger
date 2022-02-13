@@ -12,6 +12,7 @@
 *.xcodeproj/
 
 *.xcuserdatad/
+xcuserdata/
 bnpl.xcodeproj/project.pbxproj
 
 ## Build generated
