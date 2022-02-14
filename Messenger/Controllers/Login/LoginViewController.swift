@@ -19,6 +19,7 @@ private enum Constants {
 
     static let emailErrorLabelText = "Incorrect Email"
     static let passwordErrorLabelText = "Password is too short"
+    static let requiredFieldLabelText = "This field is required"
 
     static let passwordTextFieldPlaceholder = "Password"
 
@@ -29,9 +30,12 @@ class LoginViewController: UIViewController {
 
     private let scrollView = UIScrollView()
     private let messengerImageView = UIImageView()
-    private let emailTextField = UITextField()
+    // TODO: Add validation for email field to conform email regexp
+    private let emailTextField = CustomTextField()
+        .setPlaceholder(with: Constants.emailTextFieldPlaceholder)
     private let emailErrorLabel = UILabel()
-    private let passwordTextField = UITextField()
+    private let passwordTextField = CustomTextField()
+        .setPlaceholder(with: Constants.passwordTextFieldPlaceholder)
     private let passwordErrorLabel = UILabel()
     private let loginButton = UIButton()
 
@@ -41,9 +45,7 @@ class LoginViewController: UIViewController {
         setUpView()
         setUpScrollView()
         setUpMessengerImageView()
-        setUpEmailTextField()
         setUpEmailErrorLabel()
-        setUpPasswordTextField()
         setUpPasswordErrorLabel()
         setUpLoginButton()
 
@@ -84,61 +86,10 @@ class LoginViewController: UIViewController {
         messengerImageView.image = UIImage(named: "messenger")
     }
 
-    // TODO: Add validation for email field to conform email regexp
-    private func setUpEmailTextField() {
-        emailTextField.autocapitalizationType = .none
-        emailTextField.autocorrectionType = .no
-        emailTextField.returnKeyType = .done
-        emailTextField.layer.borderWidth = Constants.emailTextFieldBorderWidth
-        emailTextField.layer.cornerRadius = Constants.cornerRadius
-        emailTextField.layer.borderColor = UIColor.lightGray.cgColor
-        emailTextField.placeholder = Constants.emailTextFieldPlaceholder
-
-        emailTextField.leftView = UIView(frame: .init(x: 0,
-                                                      y: 0,
-                                                      width: 5,
-                                                      height: 0))
-        emailTextField.rightView = UIView(frame: .init(x: emailTextField.right-5,
-                                                       y: 0,
-                                                       width: 5,
-                                                       height: 0))
-
-        emailTextField.leftViewMode = .always
-        emailTextField.leftView?.backgroundColor = .white
-        emailTextField.rightViewMode = .always
-        emailTextField.rightView?.backgroundColor = .white
-    }
-
     private func setUpEmailErrorLabel() {
         emailErrorLabel.text = Constants.emailErrorLabelText
         emailErrorLabel.textColor = .red
         emailErrorLabel.isHidden = true
-    }
-
-
-    private func setUpPasswordTextField() {
-        passwordTextField.autocapitalizationType = .none
-        passwordTextField.autocorrectionType = .no
-        passwordTextField.returnKeyType = .continue
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.layer.borderWidth = Constants.emailTextFieldBorderWidth
-        passwordTextField.layer.cornerRadius = Constants.cornerRadius
-        passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
-        passwordTextField.placeholder = Constants.passwordTextFieldPlaceholder
-
-        passwordTextField.leftView = UIView(frame: .init(x: 0,
-                                                      y: 0,
-                                                      width: 5,
-                                                      height: 0))
-        passwordTextField.rightView = UIView(frame: .init(x: emailTextField.right-5,
-                                                       y: 0,
-                                                       width: 5,
-                                                       height: 0))
-
-        passwordTextField.leftViewMode = .always
-        passwordTextField.leftView?.backgroundColor = .white
-        passwordTextField.rightViewMode = .always
-        passwordTextField.rightView?.backgroundColor = .white
     }
 
     private func setUpPasswordErrorLabel() {
@@ -175,17 +126,17 @@ class LoginViewController: UIViewController {
         emailErrorLabel.frame = CGRect(x: emailTextField.left + 5,
                                        y: emailTextField.bottom + 6,
                                        width: emailTextField.width - 5,
-                                       height: 16)
+                                       height: 20)
 
         passwordTextField.frame = CGRect(x: (scrollView.width - textFieldWidth)/2,
-                                           y: emailErrorLabel.bottom + 6,
+                                         y: emailErrorLabel.bottom + 6,
                                          width: textFieldWidth,
                                          height: Constants.viewsHeight)
 
         passwordErrorLabel.frame = CGRect(x: passwordTextField.left + 5,
                                           y: passwordTextField.bottom + 6,
                                           width: passwordTextField.width - 5,
-                                          height: 16)
+                                          height: 20)
 
         loginButton.frame = CGRect(x: (scrollView.width - textFieldWidth)/2,
                                    y: passwordTextField.bottom + 40,
@@ -224,7 +175,12 @@ extension LoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == emailTextField {
             guard let text = textField.text else { return }
-            if text.count < 12 {
+            if text.isEmpty {
+                emailErrorLabel.text = Constants.requiredFieldLabelText
+                textField.layer.borderColor = UIColor.red.cgColor
+                emailErrorLabel.isHidden = false
+            } else if text.count < 12 {
+                emailErrorLabel.text = Constants.emailErrorLabelText
                 textField.layer.borderColor = UIColor.red.cgColor
                 emailErrorLabel.isHidden = false
             } else {
@@ -235,7 +191,12 @@ extension LoginViewController: UITextFieldDelegate {
 
         if textField == passwordTextField {
             guard let text = textField.text else { return }
-            if text.count <= 6 {
+            if text.isEmpty {
+                passwordErrorLabel.text = Constants.requiredFieldLabelText
+                textField.layer.borderColor = UIColor.red.cgColor
+                passwordErrorLabel.isHidden = false
+            } else if text.count <= 6 {
+                passwordErrorLabel.text = Constants.passwordErrorLabelText
                 textField.layer.borderColor = UIColor.red.cgColor
                 passwordErrorLabel.isHidden = false
             } else {

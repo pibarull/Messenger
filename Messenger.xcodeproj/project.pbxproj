@@ -21,6 +21,7 @@
 		3B08BE6927B2F7D400C36C2F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B08BE6827B2F7D400C36C2F /* ProfileViewController.swift */; };
 		3BEFAAB227B44F6E00D1E3B0 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEFAAB127B44F6E00D1E3B0 /* UIView+.swift */; };
 		3BEFAABF27B93DCD00D1E3B0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3BEFAABE27B93DCD00D1E3B0 /* SnapKit */; };
+		3BEFAACB27BACFEF00D1E3B0 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEFAACA27BACFEF00D1E3B0 /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		3B08BE6627B2F7C200C36C2F /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		3B08BE6827B2F7D400C36C2F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3BEFAAB127B44F6E00D1E3B0 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		3BEFAACA27BACFEF00D1E3B0 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		3B08BE5A27B2F43600C36C2F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3BEFAAC927BACFD400D1E3B0 /* Helpers */,
 				3B08BE5D27B2F48D00C36C2F /* Storyboards */,
 			);
 			path = Views;
@@ -152,6 +155,14 @@
 				3BEFAAB127B44F6E00D1E3B0 /* UIView+.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3BEFAAC927BACFD400D1E3B0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3BEFAACA27BACFEF00D1E3B0 /* CustomTextField.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B08BE5F27B2F74900C36C2F /* LoginViewController.swift in Sources */,
+				3BEFAACB27BACFEF00D1E3B0 /* CustomTextField.swift in Sources */,
 				3B08BE6127B2F75900C36C2F /* RegisterViewController.swift in Sources */,
 				3B08BE6727B2F7C200C36C2F /* NewConversationViewController.swift in Sources */,
 				3B08BE4927B2D33F00C36C2F /* ConversationViewController.swift in Sources */,

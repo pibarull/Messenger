@@ -24,6 +24,7 @@ private enum Constants {
 
     static let emailErrorLabelText = "Incorrect Email"
     static let passwordErrorLabelText = "Password is too short"
+    static let requiredFieldLabelText = "This field is required"
 
     static let passwordTextFieldPlaceholder = "Password"
 
@@ -34,13 +35,18 @@ class RegisterViewController: UIViewController {
 
     private let scrollView = UIScrollView()
     private let profileImageView = UIImageView()
-    private let firstNameTextField = UITextField()
-//    private let passwordErrorLabel = UILabel()
-    private let secondNameTextField = UITextField()
-//    private let passwordErrorLabel = UILabel()
-    private let emailTextField = UITextField()
+    private let firstNameTextField = CustomTextField()
+        .setPlaceholder(with: Constants.firstNameTextFieldPlaceholder)
+    private let firstNameErrorLabel = UILabel()
+    private let secondNameTextField = CustomTextField()
+        .setPlaceholder(with: Constants.secondNameTextFieldPlaceholder)
+    private let secondNameErrorLabel = UILabel()
+    // TODO: Add validation for email field to conform email regexp
+    private let emailTextField = CustomTextField()
+        .setPlaceholder(with: Constants.emailTextFieldPlaceholder)
     private let emailErrorLabel = UILabel()
-    private let passwordTextField = UITextField()
+    private let passwordTextField = CustomTextField()
+        .setPlaceholder(with: Constants.passwordTextFieldPlaceholder)
     private let passwordErrorLabel = UILabel()
     private let registerButton = UIButton()
 
@@ -50,11 +56,9 @@ class RegisterViewController: UIViewController {
         setUpView()
         setUpScrollView()
         setUpProfileImageView()
-        setUpFirstNameTextField()
-        setUpSecondNameTextField()
-        setUpEmailTextField()
+        setUpFirstNameErrorLabel()
+        setUpSecondNameErrorLabel()
         setUpEmailErrorLabel()
-        setUpPasswordTextField()
         setUpPasswordErrorLabel()
         setUpRegisterButton()
     }
@@ -77,7 +81,9 @@ class RegisterViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(profileImageView)
         scrollView.addSubview(firstNameTextField)
+        scrollView.addSubview(firstNameErrorLabel)
         scrollView.addSubview(secondNameTextField)
+        scrollView.addSubview(secondNameErrorLabel)
         scrollView.addSubview(emailTextField)
         scrollView.addSubview(emailErrorLabel)
         scrollView.addSubview(passwordTextField)
@@ -111,109 +117,22 @@ class RegisterViewController: UIViewController {
         presentPhotoActionSheet()
     }
 
-    private func setUpFirstNameTextField() {
-        firstNameTextField.autocapitalizationType = .none
-        firstNameTextField.autocorrectionType = .no
-        firstNameTextField.returnKeyType = .done
-        firstNameTextField.layer.borderWidth = Constants.emailTextFieldBorderWidth
-        firstNameTextField.layer.cornerRadius = Constants.cornerRadius
-        firstNameTextField.layer.borderColor = UIColor.lightGray.cgColor
-        firstNameTextField.placeholder = Constants.firstNameTextFieldPlaceholder
-
-        firstNameTextField.leftView = UIView(frame: .init(x: 0,
-                                                      y: 0,
-                                                      width: 5,
-                                                      height: 0))
-        firstNameTextField.rightView = UIView(frame: .init(x: firstNameTextField.right-5,
-                                                       y: 0,
-                                                       width: 5,
-                                                       height: 0))
-
-        firstNameTextField.leftViewMode = .always
-        firstNameTextField.leftView?.backgroundColor = .white
-        firstNameTextField.rightViewMode = .always
-        firstNameTextField.rightView?.backgroundColor = .white
+    private func setUpFirstNameErrorLabel() {
+        firstNameErrorLabel.text = Constants.requiredFieldLabelText
+        firstNameErrorLabel.textColor = .red
+        firstNameErrorLabel.isHidden = true
     }
 
-    private func setUpSecondNameTextField() {
-        secondNameTextField.autocapitalizationType = .none
-        secondNameTextField.autocorrectionType = .no
-        secondNameTextField.returnKeyType = .done
-        secondNameTextField.layer.borderWidth = Constants.emailTextFieldBorderWidth
-        secondNameTextField.layer.cornerRadius = Constants.cornerRadius
-        secondNameTextField.layer.borderColor = UIColor.lightGray.cgColor
-        secondNameTextField.placeholder = Constants.secondNameTextFieldPlaceholder
-
-        secondNameTextField.leftView = UIView(frame: .init(x: 0,
-                                                      y: 0,
-                                                      width: 5,
-                                                      height: 0))
-        secondNameTextField.rightView = UIView(frame: .init(x: secondNameTextField.right-5,
-                                                       y: 0,
-                                                       width: 5,
-                                                       height: 0))
-
-        secondNameTextField.leftViewMode = .always
-        secondNameTextField.leftView?.backgroundColor = .white
-        secondNameTextField.rightViewMode = .always
-        secondNameTextField.rightView?.backgroundColor = .white
-    }
-
-    // TODO: Add validation for email field to conform email regexp
-    private func setUpEmailTextField() {
-        emailTextField.autocapitalizationType = .none
-        emailTextField.autocorrectionType = .no
-        emailTextField.returnKeyType = .done
-        emailTextField.layer.borderWidth = Constants.emailTextFieldBorderWidth
-        emailTextField.layer.cornerRadius = Constants.cornerRadius
-        emailTextField.layer.borderColor = UIColor.lightGray.cgColor
-        emailTextField.placeholder = Constants.emailTextFieldPlaceholder
-
-        emailTextField.leftView = UIView(frame: .init(x: 0,
-                                                      y: 0,
-                                                      width: 5,
-                                                      height: 0))
-        emailTextField.rightView = UIView(frame: .init(x: emailTextField.right-5,
-                                                       y: 0,
-                                                       width: 5,
-                                                       height: 0))
-
-        emailTextField.leftViewMode = .always
-        emailTextField.leftView?.backgroundColor = .white
-        emailTextField.rightViewMode = .always
-        emailTextField.rightView?.backgroundColor = .white
+    private func setUpSecondNameErrorLabel() {
+        secondNameErrorLabel.text = Constants.requiredFieldLabelText
+        secondNameErrorLabel.textColor = .red
+        secondNameErrorLabel.isHidden = true
     }
 
     private func setUpEmailErrorLabel() {
         emailErrorLabel.text = Constants.emailErrorLabelText
         emailErrorLabel.textColor = .red
         emailErrorLabel.isHidden = true
-    }
-
-
-    private func setUpPasswordTextField() {
-        passwordTextField.autocapitalizationType = .none
-        passwordTextField.autocorrectionType = .no
-        passwordTextField.returnKeyType = .continue
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.layer.borderWidth = Constants.emailTextFieldBorderWidth
-        passwordTextField.layer.cornerRadius = Constants.cornerRadius
-        passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
-        passwordTextField.placeholder = Constants.passwordTextFieldPlaceholder
-
-        passwordTextField.leftView = UIView(frame: .init(x: 0,
-                                                      y: 0,
-                                                      width: 5,
-                                                      height: 0))
-        passwordTextField.rightView = UIView(frame: .init(x: emailTextField.right-5,
-                                                       y: 0,
-                                                       width: 5,
-                                                       height: 0))
-
-        passwordTextField.leftViewMode = .always
-        passwordTextField.leftView?.backgroundColor = .white
-        passwordTextField.rightViewMode = .always
-        passwordTextField.rightView?.backgroundColor = .white
     }
 
     private func setUpPasswordErrorLabel() {
@@ -247,31 +166,44 @@ class RegisterViewController: UIViewController {
                                            y: profileImageView.bottom + 30,
                                            width: textFieldWidth,
                                            height: Constants.viewsHeight)
+
+        firstNameErrorLabel.frame = CGRect(x: firstNameTextField.left + 5,
+                                           y: firstNameTextField.bottom + 6,
+                                           width: firstNameTextField.width - 5,
+                                           height: 20)
         
         secondNameTextField.frame = CGRect(x: (scrollView.width - textFieldWidth)/2,
-                                           y: firstNameTextField.bottom + 30,
+                                           y: firstNameErrorLabel.bottom + 6,
                                            width: textFieldWidth,
                                            height: Constants.viewsHeight)
 
+        secondNameErrorLabel.frame = CGRect(x: secondNameTextField.left + 5,
+                                            y: secondNameTextField.bottom + 6,
+                                            width: secondNameTextField.width - 5,
+                                            height: 20)
+        print(secondNameErrorLabel.frame)
+
         emailTextField.frame = CGRect(x: (scrollView.width - textFieldWidth)/2,
-                                           y: secondNameTextField.bottom + 30,
-                                           width: textFieldWidth,
-                                           height: Constants.viewsHeight)
+                                      y: secondNameErrorLabel.bottom + 6,
+                                      width: textFieldWidth,
+                                      height: Constants.viewsHeight)
+        emailTextField.layoutSubviews()
+        print(emailTextField.frame)
 
         emailErrorLabel.frame = CGRect(x: emailTextField.left + 5,
                                        y: emailTextField.bottom + 6,
                                        width: emailTextField.width - 5,
-                                       height: 16)
+                                       height: 20)
 
         passwordTextField.frame = CGRect(x: (scrollView.width - textFieldWidth)/2,
-                                           y: emailErrorLabel.bottom + 6,
+                                         y: emailErrorLabel.bottom + 6,
                                          width: textFieldWidth,
                                          height: Constants.viewsHeight)
 
         passwordErrorLabel.frame = CGRect(x: passwordTextField.left + 5,
                                           y: passwordTextField.bottom + 6,
                                           width: passwordTextField.width - 5,
-                                          height: 16)
+                                          height: 20)
 
         registerButton.frame = CGRect(x: (scrollView.width - textFieldWidth)/2,
                                    y: passwordTextField.bottom + 40,
@@ -316,7 +248,12 @@ extension RegisterViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == emailTextField {
             guard let text = textField.text else { return }
-            if text.count < 12 {
+            if text.isEmpty {
+                emailErrorLabel.text = Constants.requiredFieldLabelText
+                textField.layer.borderColor = UIColor.red.cgColor
+                emailErrorLabel.isHidden = false
+            } else if text.count < 12 {
+                emailErrorLabel.text = Constants.emailErrorLabelText
                 textField.layer.borderColor = UIColor.red.cgColor
                 emailErrorLabel.isHidden = false
             } else {
@@ -327,12 +264,41 @@ extension RegisterViewController: UITextFieldDelegate {
 
         if textField == passwordTextField {
             guard let text = textField.text else { return }
-            if text.count <= 6 {
+            if text.isEmpty {
+                passwordErrorLabel.text = Constants.requiredFieldLabelText
+                textField.layer.borderColor = UIColor.red.cgColor
+                passwordErrorLabel.isHidden = false
+            } else if text.count <= 6 {
+                passwordErrorLabel.text = Constants.passwordErrorLabelText
                 textField.layer.borderColor = UIColor.red.cgColor
                 passwordErrorLabel.isHidden = false
             } else {
                 textField.layer.borderColor = UIColor.lightGray.cgColor
-                passwordErrorLabel.isHidden = false
+                passwordErrorLabel.isHidden = true
+            }
+        }
+
+        if textField == firstNameTextField {
+            guard let text = textField.text else { return }
+            if text.isEmpty {
+                firstNameErrorLabel.text = Constants.requiredFieldLabelText
+                textField.layer.borderColor = UIColor.red.cgColor
+                firstNameErrorLabel.isHidden = false
+            } else {
+                textField.layer.borderColor = UIColor.lightGray.cgColor
+                firstNameErrorLabel.isHidden = true
+            }
+        }
+
+        if textField == secondNameTextField {
+            guard let text = textField.text else { return }
+            if text.isEmpty {
+                secondNameErrorLabel.text = Constants.requiredFieldLabelText
+                textField.layer.borderColor = UIColor.red.cgColor
+                secondNameErrorLabel.isHidden = false
+            } else {
+                textField.layer.borderColor = UIColor.lightGray.cgColor
+                secondNameErrorLabel.isHidden = true
             }
         }
     }
