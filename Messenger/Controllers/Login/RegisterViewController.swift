@@ -68,6 +68,8 @@ class RegisterViewController: UIViewController {
     }
 
     private func setUpView() {
+        firstNameTextField.delegate = self
+        secondNameTextField.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
 
@@ -181,14 +183,11 @@ class RegisterViewController: UIViewController {
                                             y: secondNameTextField.bottom + 6,
                                             width: secondNameTextField.width - 5,
                                             height: 20)
-        print(secondNameErrorLabel.frame)
 
         emailTextField.frame = CGRect(x: (scrollView.width - textFieldWidth)/2,
                                       y: secondNameErrorLabel.bottom + 6,
                                       width: textFieldWidth,
                                       height: Constants.viewsHeight)
-        emailTextField.layoutSubviews()
-        print(emailTextField.frame)
 
         emailErrorLabel.frame = CGRect(x: emailTextField.left + 5,
                                        y: emailTextField.bottom + 6,
